@@ -1,0 +1,20 @@
+#include <iostream>
+#include <sys/time.h>
+#include <time.h>
+#include "wiringPi.h"
+
+#include "RangingSensor.h"
+
+static RangingSensor * mp_rangingSensor;
+
+int main(void){
+
+  if( wiringPiSetupGpio() < 0){ //initialize failed
+    return 1;
+  }
+
+    mp_rangingSensor = RangingSensor::getInstance();
+    mp_rangingSensor->Initialize();
+
+
+}
