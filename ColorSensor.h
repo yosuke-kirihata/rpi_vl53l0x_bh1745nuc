@@ -14,7 +14,7 @@ public:
 
     static ColorSensor* getInstance();
     void Initialize();
-    void getColor();
+    void getColor(int * r, int * g, int * b, int * c);
 
 private:
 

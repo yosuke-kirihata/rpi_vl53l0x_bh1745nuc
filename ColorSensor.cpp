@@ -8,8 +8,6 @@
 
 #include <stdio.h>
 
-//https://github.com/ControlEverythingCommunity/BH1745NUC/blob/master/C/BH1745NUC.c
-
 ColorSensor::ColorSensor()
 {
 
@@ -52,14 +50,12 @@ void ColorSensor::Initialize()
 //        return 1;
     }
 
-
     uint8_t config[2] = {0};
 
     //BH1745NUC_MODE_CONTROL1
     config[0] = 0x41;
     config[1] = 0x00;
     write(fd, config, 2);
-
 
     //BH1745NUC_MODE_CONTROL2
     config[0] = 0x42;
@@ -70,10 +66,9 @@ void ColorSensor::Initialize()
     config[0] = 0x44;
     config[1] = 0x02;
     write(fd, config, 2);
-
 }
 
-void ColorSensor::getColor()
+void ColorSensor::getColor(int * r, int * g, int * b, int * c)
 {
 
     //BH1745NUC_RED_DATA_LSB
@@ -88,11 +83,9 @@ void ColorSensor::getColor()
     else
     {
         // Convert the data
-        int red   = (data[1] * 256 + data[0]);
-        int green = (data[3] * 256 + data[2]);
-        int blue  = (data[5] * 256 + data[4]);
-        int clear = (data[7] * 256 + data[6]);
-
-        printf("COLOR:%d,%d,%d\n",red, green, blue);
+        *r = (data[1] * 256 + data[0]);
+        *g = (data[3] * 256 + data[2]);
+        *b = (data[5] * 256 + data[4]);
+        *c = (data[7] * 256 + data[6]);
     }
 }

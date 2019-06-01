@@ -44,8 +44,9 @@ int main(void)
         ranging = mp_rangingSensor->getRanging();
         printf("RANGING:%f\n",ranging);
 
-        mp_colorSensor->getColor();
-        //printf
+        int red, blue, green, clear;
+        mp_colorSensor->getColor(&red, &blue, &green, &clear);
+        printf("COLOR:%d,%d,%d,%d\n",red, blue, green, clear);
 
     }
 
