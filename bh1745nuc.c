@@ -36,7 +36,7 @@ int32_t bh1745nuc_init(void)
     write(fd, config, 2);
 
     config[0] = BH1745NUC_MODE_CONTROL2;
-    config[1] = 0x90; // 測定実施,ゲイン1X
+    config[1] = 0x92; // 測定実施,ゲイン16X
     write(fd, config, 2);
 
     config[0] = BH1745NUC_MODE_CONTROL3;
