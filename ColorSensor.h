@@ -14,10 +14,10 @@ public:
 
     static ColorSensor* getInstance();
     void Initialize();
-    void getColor(int * r, int * g, int * b, int * c);
+    void getColor(uint16_t * r, uint16_t * g, uint16_t * b, uint16_t * c);
 
 private:
-
+    
 };
 
 

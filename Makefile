@@ -1,12 +1,14 @@
 CROSS		=
-CXX		= $(CROSS)g++
+CC			= $(CROSS)gcc
+CXX			= $(CROSS)g++
 TARGET		= app#ledtank
 CFLAGS		= -Wall -O0
-SRCS		= $(wildcard *.cpp)
-OBJS		= $(SRCS:.cpp=.o)
 
 OBJDIR		= .
 SRCDIR		= .
+
+SRCS		= $(shell find $(SRCDIR) -name "*.cpp" -or -name "*.c")
+OBJS		= $(SRCS:%=$(OBJDIR)/%.o)
 
 INCLUDES	= -I../VL53L0X_rasp/platform/inc
 INCLUDES	+= -I../VL53L0X_1.0.2/Api/core/inc
@@ -20,13 +22,12 @@ all: $(OBJS) $(TARGET)
 $(TARGET): $(OBJS)
 	$(CXX) -L../VL53L0X_rasp/bin -o $@ $(OBJS) $(LIBS)
 
-#$(OBJS): $(SRCS)
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+$(OBJDIR)/%.c.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
+
+$(OBJDIR)/%.cpp.o: $(SRCDIR)/%.cpp
 	$(CXX) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
 .PHONY: clean
 clean:
 	rm -rf $(TARGET) $(OBJS)
-
-#rctank: rctank.cpp main.cpp
-#	g++ -Wall -o rctank rctank.cpp main.cpp -lwiringPi -lpthread
